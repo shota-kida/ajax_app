@@ -1,15 +1,15 @@
-const buildHTML = (XHR) =>{
+const buildHTML = (XHR) => {
   const item = XHR.response.post;
-      const html = `
-        <div class="post">
-          <div class="post-date">
-            投稿日時：${item.created_at}
-          </div>
-          <div class="post-content">
-            ${item.content}
-          </div>
-        </div>`;
-    return html;
+  const html = `
+    <div class="post">
+      <div class="post-date">
+        投稿日時：${item.created_at}
+      </div>
+      <div class="post-content">
+        ${item.content}
+      </div>
+    </div>`;
+  return html;
 };
 
 function post (){
@@ -19,7 +19,7 @@ function post (){
     const form = document.getElementById("form");
     const formData = new FormData(form);
     const XHR = new XMLHttpRequest();
-    XHR.open("POST", "/post", true);
+    XHR.open("POST", "/posts", true);
     XHR.responseType = "json";
     XHR.send(formData);
     XHR.onload = () => {
@@ -28,9 +28,9 @@ function post (){
         return null;
       };
       const list = document.getElementById("list");
-      const formText = document.getElementById("content")
-      list.insertAdjacentHTML("afterend",buildHTML(XHR));
-      formText.value = ""
+      const formText = document.getElementById("content");
+      list.insertAdjacentHTML("afterend", buildHTML(XHR));
+      formText.value = "";
     };
   });
 };
